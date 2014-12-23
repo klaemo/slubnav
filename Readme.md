@@ -32,14 +32,14 @@ automatisch gebaut und im Browser aktualisiert (wenn ihr das [LiveReload](http:/
 
 ## Ordnerstruktur
 
-`models` - Datenmodelle (davon werde wir nicht viele brauchen)
-`pages` - "Seiten", alles was eine URL haben soll
-`public` - Fertig verpackte App die am Ende angezeigt und ausgeliefert wird (vom Buildschritt generiert)
-`styles` - CSS
-`templates` - [jade](http://jadelang.com) HTML templates, die von den views/pages gerendert werden
-`views` - Einzelne UI Elemente
-`router.js` - Definiert die Routes (URLs) auf die unsere App anspricht
-`index.js` - Startpunkt
+- `models` - Datenmodelle (davon werde wir nicht viele brauchen)
+- `pages` - "Seiten", alles was eine URL haben soll
+- `public` - Fertig verpackte App die am Ende angezeigt und ausgeliefert wird (vom Buildschritt generiert)
+- `styles` - CSS
+- `templates` - [jade](http://jadelang.com) HTML templates, die von den views/pages gerendert werden
+- `views` - Einzelne UI Elemente
+- `router.js` - Definiert die Routes (URLs) auf die unsere App anspricht
+- `index.js` - Startpunkt
 
 In `node_modules` liegen die mit `npm` installierten Module. Dieser Ordner wird automatisch verwaltet
 und ihr solltet dort nie manuell was verändern.
