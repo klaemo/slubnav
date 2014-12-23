@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+@import "../node_modules/normalize.css/normalize.css";
+@import "../node_modules/popover/popover.css";
+@import "../node_modules/popover/popover-theme.css";
+@import "typo.css";
+@import "variables.css";
+
+@import "buttons.css";
+@import "map.css";
+
+body {
+  overflow: hidden;
+}
+
+.search-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 2vh 2vw;
+  box-shadow: var(--shadow);
+}
+
+.animate {
+  transition: transform 0.325s cubic-bezier(0.215, 0.61, 0.355, 1);
+}

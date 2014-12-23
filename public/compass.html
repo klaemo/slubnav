@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Compass</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Helvetica Neue, Helvetica, sans-serif;
+      font-size: 16px;
+      -webkit-perspective: 500px;
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      width: 100%;
+      border: 1px solid grey;
+      overflow: hidden;
+      transition: -webkit-transform 150ms ease-out;
+      -webkit-transform-style: preserve-3d;
+    }
+    img {
+      margin: 0 auto;
+      width: 100%;
+      height: auto;
+      -webkit-transform: scale(1.6);
+      transition: -webkit-transform 16ms linear;
+    }
+  </style>
+</head>
+
+<body>
+  <span class="deg"></span>
+  <div class="container">
+    <img src="map.png" class="map">
+  </div>
+
+  <script>
+    var map = document.body.querySelector('.map')
+    var deg = document.body.querySelector('.deg')
+    // var container = document.body.querySelector('.container')
+    var ticking = false
+    var heading = 0, tilt = 0
+    
+    function requestElementUpdate() {
+      if (!ticking) {
+        requestAnimationFrame(updateElementTransform)
+        ticking = true
+      }
+    }
+
+    function updateElementTransform () {
+      deg.innerText = heading + '°, tilt: ' + tilt + '°';
+      var transform = [
+        'scale(1.6)',
+        'translate3d(0, 0, 0)',
+        'rotate(-' + heading +  'deg)'
+      ]
+
+      // if (tilt > 40) {
+      //   container.style.webkitTransform = 'rotateX(45deg)'
+      // } else {
+      //   container.style.webkitTransform = 'rotateX(0deg)'
+      // }
+
+      map.style.webkitTransform = transform.join(' ')
+      ticking = false
+    }
+
+    window.addEventListener('deviceorientation', function (e) {
+      heading = parseInt(e.webkitCompassHeading, 10)
+      tilt = parseInt(e.beta, 10)
+      requestElementUpdate()
+    }, false);
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+:root {
+  /* SLUB Farben */
+  --slub-red: #cc0000;
+  --slub-link: #078078;
+  --slub-header: #87cdd7;
+  --slub-lightblue: #44ddee;
+  --slub-grey: #a7a5a3;
+
+  --shadow: 2px 2px 10px rgba(170, 170, 170, 0.75);
+}

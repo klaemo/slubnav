@@ -1,0 +1,67 @@
+{
+  "name": "slub-nav",
+  "version": "1.0.0",
+  "description": "Indoornavigation für die SLUB Dresden",
+  "main": "index.js",
+  "scripts": {
+    "lint": "jshint . && jscs .",
+    "ls": "npm ls",
+    "test": "mocha -R spec",
+    "start": "npm run watch-css & npm run watch-js & drudge -t -d public",
+    "build": "npm run build-js & npm run build-css",
+    "watch-js": "watchify index.js -t jadeify -d -o public/app.built.js",
+    "watch-css": "nodemon --watch styles -e css --exec 'myth styles/index.css public/app.built.css'",
+    "build-css": "myth -c styles/index.css public/app.built.css",
+    "build-js": "browserify index.js -t jadeify -d -p [minifyify --map public/bundle.map.json --output public/bundle.map.json] > public/app.built.js"
+  },
+  "author": "Clemens Stolle <klaemo@fastmail.fm>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/klaemo/slub-nav"
+  },
+  "contributors": [
+    {
+      "name": "Fabian Gündel"
+    },
+    {
+      "name": "Oliver Lenz"
+    },
+    {
+      "name": "Leo Käßner"
+    }
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^7.0.3",
+    "drudge": "^2.0.0",
+    "jade": "^1.7.0",
+    "jadeify": "^3.1.0",
+    "jscs": "^1.8.0",
+    "jshint": "^2.5.10",
+    "minifyify": "^4.4.0",
+    "mocha": "^2.0.1",
+    "myth": "^1.2.1",
+    "nodemon": "^1.2.1",
+    "pre-commit": "0.0.9",
+    "watchify": "^2.2.1"
+  },
+  "dependencies": {
+    "ampersand-dom": "^1.2.7",
+    "ampersand-router": "^1.0.6",
+    "ampersand-state": "^4.4.4",
+    "ampersand-view": "^7.2.0",
+    "ampersand-view-switcher": "^1.1.2",
+    "domready": "^1.0.7",
+    "fastclick": "^1.0.3",
+    "hammerjs": "^2.0.4",
+    "normalize.css": "^3.0.2",
+    "popover": "^1.0.3",
+    "raf-component": "^1.1.2",
+    "transform-style": "^0.1.0"
+  },
+  "pre-commit": [
+    "lint",
+    "ls",
+    "build"
+  ]
+}

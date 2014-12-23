@@ -1,0 +1,86 @@
+.map-view {
+  perspective: 800px;
+  margin: 0 auto;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  opacity: 1;
+  animation: zoomOut 1s ease-in-out;
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  33% {
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.map {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  will-change: transform;
+  transition: transform 350ms ease-out;
+}
+
+.layered {
+  /*width: 75%;*/
+  /*transform: scale(0.5, 0.5);*/
+}
+
+.layered .map {
+  border: 1px solid #aaa;
+  box-shadow: 5px 5px 40px #aaa;
+}
+
+.layered .map.layer-0 {
+  transform: rotateX(80deg) rotateZ(45deg) translateZ(50px) scale(0.6, 0.6);
+}
+
+.layered .map.layer-1 {
+  transform: rotateX(80deg) rotateZ(45deg) translateZ(0px) scale(0.6, 0.6);
+}
+
+.layered .map.layer-2 {
+  transform: rotateX(80deg) rotateZ(45deg) translateZ(-50px) scale(0.6, 0.6);
+  box-shadow: 5px 5px 40px #aaa;
+}
+
+/* Scanner Popover */
+
+.scan-box-popover {
+  background-color: white;
+  box-shadow: var(--shadow);
+  border-radius: 3px;
+  border: 1px solid #d4d5d5;
+  /*margin-left: -2vw;*/
+  margin-top: -15px;
+  will-change: transform;
+}
+
+.scan-box-popover.open {
+  transform-origin: 90% 110%;
+  animation-name: open;
+  animation-delay: 0;
+  animation-duration: 350ms;
+  animation-timing-function: ease-out;
+}
+
+/*.scan-box-popover.fadeOut {
+  opacity: 0 !important;
+  transition: opacity 100ms;
+}*/
+
+.scan-box-popover .placeholder {
+  background-color: grey;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}

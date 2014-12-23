@@ -1,0 +1,9 @@
+{
+  "browser": true,
+  "asi": true,
+  "node": true,
+  "undef": true,
+  "unused": "vars",
+  "eqeqeq": true,
+  "strict": true
+}
