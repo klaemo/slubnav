@@ -52,7 +52,7 @@
     "mocha": "^2.0.1",
     "myth": "^1.2.1",
     "nodemon": "^1.2.1",
-    "pre-commit": "0.0.9",
+    "pre-commit": "klaemo/pre-commit",
     "uglifyify": "^2.6.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
