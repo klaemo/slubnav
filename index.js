@@ -3,25 +3,23 @@
 var domready = require('domready')
 var attachFastClick = require('fastclick')
 
-// Unser application code
+// our application code
+var app = require('./app')
+var State = require('./models/app-state')
 var Router = require('./router')
 var AppView = require('./pages/app')
 
 // globale app variable
-window.APP = {
+app.extend({
   init: function() {
     var self = this
 
     this.router = new Router()
-
-    // app state model
-    // this.me = new Me()
+    this.state = new State()
 
     // erst ausführen wenn die DOM bereit ist
     domready(function() {
-      self.view = new AppView({
-        el: document.body
-      })
+      self.view = new AppView({ el: document.body })
       self.view.render()
       self.router.history.start({ pushState: true, root: '/' })
 
@@ -38,7 +36,9 @@ window.APP = {
     var url = (page.charAt(0) === '/') ? page.slice(1) : page
     this.router.history.navigate(url, { trigger: true })
   }
-}
+})
+
+window.slubnav = app
 
 // ...und abfahrt!
-window.APP.init()
+app.init()

@@ -1,5 +1,6 @@
 'use strict';
 var Router = require('ampersand-router')
+var app = require('./app')
 
 // Unsere Pages
 // var IndexPage = require('./pages/index-page')
@@ -18,10 +19,10 @@ module.exports = Router.extend({
   },
 
   floors: function() {
-    window.APP.view.model.set('showLayers', true)
+    app.state.set('showLayers', true)
   },
 
   scan: function() {
-    window.APP.view.model.set('scannerVisible', true)
+    app.state.set('scannerVisible', true)
   }
 })

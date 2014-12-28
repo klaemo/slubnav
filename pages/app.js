@@ -1,6 +1,6 @@
 'use strict';
 var View = require('ampersand-view')
-var State = require('ampersand-state')
+var app = require('../app')
 var ViewSwitcher = require('ampersand-view-switcher')
 
 var template = require('../templates/app.jade')
@@ -8,13 +8,6 @@ var template = require('../templates/app.jade')
 var SearchBox = require('../views/search-box')
 var Buttons = require('../views/buttons')
 var MapView = require('../views/map')
-
-var Model = State.extend({
-  props: {
-    showLayers: { type: 'boolean', default: false },
-    scannerVisible: { type: 'boolean', default: true }
-  }
-})
 
 module.exports = View.extend({
   template: template,
@@ -24,8 +17,7 @@ module.exports = View.extend({
   },
 
   initialize: function() {
-    this.model = new Model()
-    this.listenTo(global.APP.router, 'page', this.handleNewPage)
+    this.listenTo(app.router, 'page', this.handleNewPage)
   },
 
   handleLinkClick: function(e) {
@@ -56,9 +48,9 @@ module.exports = View.extend({
     // main renderer
     this.renderWithTemplate()
 
-    this.renderSubview(new MapView({ model: this.model }))
+    this.renderSubview(new MapView({ model: app.state }))
     this.renderSubview(new SearchBox())
-    this.renderSubview(new Buttons({ model: this.model }))
+    this.renderSubview(new Buttons({ model: app.state }))
 
     // init and configure our page switcher
     this.pageSwitcher = new ViewSwitcher(this.query('main'), {
