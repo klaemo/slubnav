@@ -1,5 +1,7 @@
 # Komplexpraktikum InfoVis - Virtueller Rundgang
 
+Live: [slub.klaemo.me](http://slub.klaemo.me) (work in progress)
+
 ## Installation
 Ladet euch [node.js](http://nodejs.org) herunter und installiert es.
 Dann habt ihr auf der Kommandozeile das `node` Kommando.

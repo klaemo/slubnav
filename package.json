@@ -4,15 +4,20 @@
   "description": "Indoornavigation für die SLUB Dresden",
   "main": "index.js",
   "scripts": {
+    "deploy": "gulp deploy",
     "lint": "jshint . && jscs .",
     "ls": "npm ls",
     "test": "mocha -R spec",
     "start": "npm run watch-css & npm run watch-js & drudge -t -d public",
-    "build": "npm run build-js & npm run build-css",
-    "watch-js": "watchify index.js -t jadeify -d -o public/app.built.js",
-    "watch-css": "nodemon --watch styles -e css --exec 'myth styles/index.css public/app.built.css'",
-    "build-css": "myth -c styles/index.css public/app.built.css",
-    "build-js": "browserify index.js -t jadeify -d -p [minifyify --map public/bundle.map.json --output public/bundle.map.json] > public/app.built.js"
+    "build": "gulp build",
+    "deploy": "npm ls && npm run lint && gulp deploy",
+    "watch-js": "watchify index.js -d -o public/app.built.js",
+    "watch-css": "nodemon --watch styles -e css --exec 'myth styles/index.css public/app.built.css'"
+  },
+  "browserify": {
+    "transform": [
+      "jadeify"
+    ]
   },
   "author": "Clemens Stolle <klaemo@fastmail.fm>",
   "repository": {
@@ -32,17 +37,24 @@
   ],
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^7.0.3",
+    "browserify": "^7.1.0",
+    "del": "^1.1.1",
     "drudge": "^2.0.0",
+    "gulp": "^3.8.10",
+    "gulp-awspublish": "0.0.23",
+    "gulp-myth": "^1.0.2",
+    "gulp-rename": "^1.2.0",
+    "gulp-rev": "^2.0.1",
     "jade": "^1.7.0",
     "jadeify": "^3.1.0",
     "jscs": "^1.8.0",
     "jshint": "^2.5.10",
-    "minifyify": "^4.4.0",
     "mocha": "^2.0.1",
     "myth": "^1.2.1",
     "nodemon": "^1.2.1",
     "pre-commit": "0.0.9",
+    "uglifyify": "^2.6.0",
+    "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
   },
   "dependencies": {
