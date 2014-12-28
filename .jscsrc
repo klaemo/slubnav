@@ -1,6 +1,6 @@
 {
     "preset": "airbnb",
-    "excludeFiles": ["node_modules/**", "public/**", "build/**"],
+    "excludeFiles": ["node_modules", "public", "build"],
     "disallowMultipleVarDecl": "exceptUndefined",
     "requireMultipleVarDecl": null,
     "safeContextKeyword": ["self"]

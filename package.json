@@ -4,13 +4,11 @@
   "description": "Indoornavigation für die SLUB Dresden",
   "main": "index.js",
   "scripts": {
-    "deploy": "gulp deploy",
-    "lint": "jshint . && jscs .",
-    "ls": "npm ls",
+    "deploy": "npm ls && npm run lint && gulp deploy",
+    "lint": "jshint . & jscs .",
     "test": "mocha -R spec",
     "start": "npm run watch-css & npm run watch-js & drudge -t -d public",
     "build": "gulp build",
-    "deploy": "npm ls && npm run lint && gulp deploy",
     "watch-js": "watchify index.js -d -o public/app.built.js",
     "watch-css": "nodemon --watch styles -e css --exec 'myth styles/index.css public/app.built.css'"
   },
@@ -72,7 +70,6 @@
     "transform-style": "^0.1.0"
   },
   "pre-commit": [
-    "lint",
-    "ls"
+    "lint"
   ]
 }
