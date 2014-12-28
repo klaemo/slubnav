@@ -23,11 +23,16 @@
 }
 
 .map {
+  opacity: 0;
   position: absolute;
   width: 100%;
   height: auto;
   will-change: transform;
-  transition: transform 350ms ease-out;
+  transition: transform 350ms ease-out, opacity 350ms;
+}
+
+.map.active {
+  opacity: 1;
 }
 
 .layered {
@@ -36,21 +41,28 @@
 }
 
 .layered .map {
+  opacity: 1;
+  cursor: pointer;
   border: 1px solid #aaa;
   box-shadow: 5px 5px 40px #aaa;
 }
 
-.layered .map.layer-0 {
+.layered .map:hover,
+.layered .map.active {
+  border: 1px solid var(--slub-red);
+  box-shadow: 5px 5px 40px var(--slub-red);
+}
+
+.layered .map.floor-0 {
+  transform: rotateX(80deg) rotateZ(45deg) translateZ(100px) scale(0.6, 0.6);
+}
+
+.layered .map.floor--1 {
   transform: rotateX(80deg) rotateZ(45deg) translateZ(50px) scale(0.6, 0.6);
 }
 
-.layered .map.layer-1 {
+.layered .map.floor--2 {
   transform: rotateX(80deg) rotateZ(45deg) translateZ(0px) scale(0.6, 0.6);
-}
-
-.layered .map.layer-2 {
-  transform: rotateX(80deg) rotateZ(45deg) translateZ(-50px) scale(0.6, 0.6);
-  box-shadow: 5px 5px 40px #aaa;
 }
 
 /* Scanner Popover */
