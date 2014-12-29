@@ -26,7 +26,7 @@ module.exports = View.extend({
       this.scanner.remove()
     } else {
       this.scanner = new ScanBox({
-        triggerEl: event.target
+        triggerEl: this.query('.scan-button')
       })
       this.scanner.render()
     }
