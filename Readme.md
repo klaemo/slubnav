@@ -1,5 +1,4 @@
-# Komplexpraktikum InfoVis - Virtueller Rundgang
-
+## Komplexpraktikum InfoVis - Virtueller Rundgang [![Build Status](https://travis-ci.org/klaemo/slubnav.svg)](https://travis-ci.org/klaemo/slubnav)
 Live: [slub.klaemo.me](http://slub.klaemo.me) (work in progress)
 
 ## Installation
@@ -51,9 +50,10 @@ und ihr solltet dort nie manuell was verändern.
 **Kein jQuery**
 
 - [ampersand-*](http://ampersandjs.com)
-- Hammer.js (für touch input)
+- [Hammer.js](https://hammerjs.github.io/) (für touch input)
 - [Myth](http://www.myth.io/) als CSS-Präprozessor
 - [browserify](http://browserify.org/)
+- [tape](https://www.npmjs.com/package/tape) für die Tests
 - und andere kleinere
 
 weitere findet ihr auf [tools.ampersandjs.com](http://tools.ampersandjs.com) und [npmjs.com](https://npmjs.com).

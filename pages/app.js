@@ -28,7 +28,7 @@ module.exports = View.extend({
     // and it's a local url, navigate internally
     if (local && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey) {
       e.preventDefault()
-      global.APP.navigate(aTag.pathname)
+      app.navigate(aTag.pathname)
     }
   },
 
@@ -63,7 +63,7 @@ module.exports = View.extend({
         newView.el.classList.add('active')
 
         // store an additional reference, just because
-        global.APP.currentPage = newView
+        app.currentPage = newView
       }
     })
 

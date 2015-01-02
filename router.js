@@ -24,5 +24,9 @@ module.exports = Router.extend({
 
   scan: function() {
     app.state.set('scannerVisible', true)
+  },
+
+  code: function(code) {
+    app.state.set('target', code)
   }
 })

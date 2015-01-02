@@ -6,6 +6,7 @@ var attachFastClick = require('fastclick')
 // our application code
 var app = require('./app')
 var State = require('./models/app-state')
+var Locations = require('./models/locations')
 var Router = require('./router')
 var AppView = require('./pages/app')
 
@@ -16,6 +17,10 @@ app.extend({
 
     this.router = new Router()
     this.state = new State()
+    this.locations = new Locations([
+      { id: 1, name: 'Rechtswissenschaften' },
+      { id: 2, name: 'Wirtschaftswissenschaften' }
+    ])
 
     // erst ausführen wenn die DOM bereit ist
     domready(function() {

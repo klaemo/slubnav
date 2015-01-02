@@ -4,3 +4,4 @@ public/*.js
 public/*.css
 public/*.map.json
 build
+test/browser/*.js
