@@ -10,15 +10,14 @@ module.exports = Collection.extend({
   }),
 
   initialize: function(models, opts) {
-    var hb = new Hummingbird.Index()
+    this._hb = new Hummingbird.Index()
     models = models || []
-    models.forEach(function(model) {
-      hb.add({ id: model.id, name: model.name }, false)
-    })
-    this._hb = hb
-    this.on('add change', function(model) {
-      hb.add({ id: model.id, name: model.name })
-    }, this)
+    models.forEach(this._addIndex, this)
+    this.on('add change', this._addIndex, this)
+  },
+
+  _addIndex: function(model) {
+    this._hb.add({ id: model.id, name: model.name })
   },
 
   search: function(query, cb) {
