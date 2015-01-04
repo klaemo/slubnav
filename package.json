@@ -47,7 +47,7 @@
     "gulp-rev": "^2.0.1",
     "jade": "^1.7.0",
     "jadeify": "git://github.com/domenic/jadeify#4.0.0",
-    "jscs": "^1.8.0",
+    "jscs": "1.8.1",
     "jshint": "^2.5.10",
     "myth": "^1.2.1",
     "nodemon": "^1.2.1",
