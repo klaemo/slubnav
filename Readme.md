@@ -63,6 +63,7 @@ weitere findet ihr auf [tools.ampersandjs.com](http://tools.ampersandjs.com) und
 Falls ihr Sublime Text 3 verwendet empfehle ich folgende Plugins:
 
 - [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) mit [jshint](https://github.com/SublimeLinter/SublimeLinter-jshint) und [jscs](https://github.com/SublimeLinter/SublimeLinter-jscs/)
+- [Jade](https://packagecontrol.io/packages/Jade)
 
 ## Contributors
 - Fabian Gündel
