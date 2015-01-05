@@ -27,6 +27,7 @@ gulp.task('copy', ['clean'], function() {
 
 gulp.task('build-js', ['copy'], function() {
   return browserify('./index.js')
+    .plugin('bundle-collapser/plugin')
     .transform({ global: true }, 'uglifyify')
     .bundle()
     .pipe(source('app.built.js'))

@@ -38,6 +38,7 @@
   "license": "ISC",
   "devDependencies": {
     "browserify": "^8.0.3",
+    "bundle-collapser": "^1.1.1",
     "del": "^1.1.1",
     "drudge": "^2.0.0",
     "gulp": "^3.8.10",
