@@ -31,8 +31,6 @@ gulp.task('build-js', ['copy'], function() {
     .bundle()
     .pipe(source('app.built.js'))
     .pipe(gulp.dest('build'))
-    .pipe(rev.manifest())
-    .pipe(gulp.dest('build'))
 })
 
 gulp.task('build-css', ['copy'], function() {

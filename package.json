@@ -4,7 +4,7 @@
   "description": "Indoornavigation für die SLUB Dresden",
   "main": "index.js",
   "scripts": {
-    "deploy": "npm ls && npm run lint npm test && && gulp deploy",
+    "deploy": "npm ls && npm run lint && npm test && gulp deploy",
     "lint": "jshint . & jscs .",
     "browser-test": "browserify test/*.js -d -o test/test.bundle.js && open test/test.html",
     "test": "tape test/*.js | tap-spec",
