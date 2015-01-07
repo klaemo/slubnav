@@ -37,26 +37,26 @@ automatisch gebaut und im Browser aktualisiert (wenn ihr das [LiveReload](http:/
 - `pages` - "Seiten", alles was eine URL haben soll
 - `public` - Fertig verpackte App die am Ende angezeigt und ausgeliefert wird (vom Buildschritt generiert)
 - `styles` - CSS
+- `test` - Tests
 - `templates` - [jade](http://jadelang.com) HTML templates, die von den views/pages gerendert werden
 - `views` - Einzelne UI Elemente
 - `router.js` - Definiert die Routes (URLs) auf die unsere App anspricht
 - `index.js` - Startpunkt
 
-In `node_modules` liegen die mit `npm` installierten Module. Dieser Ordner wird automatisch verwaltet
-und ihr solltet dort nie manuell was verändern.
+In `node_modules` liegen die mit `npm` installierten Module. Dieser Ordner wird automatisch verwaltet und ihr solltet dort nie manuell was verändern.
 
 ## Libraries/Tools
-
-**Kein jQuery**
 
 - [ampersand-*](http://ampersandjs.com)
 - [Hammer.js](https://hammerjs.github.io/) (für touch input)
 - [Myth](http://www.myth.io/) als CSS-Präprozessor
 - [browserify](http://browserify.org/)
 - [tape](https://www.npmjs.com/package/tape) für die Tests
-- und andere kleinere
+- und andere kleinere, siehe `package.json`
 
-weitere findet ihr auf [tools.ampersandjs.com](http://tools.ampersandjs.com) und [npmjs.com](https://npmjs.com).
+**Kein jQuery**
+
+Weitere findet ihr auf [tools.ampersandjs.com](http://tools.ampersandjs.com) und [npmjs.com](https://npmjs.com).
 
 ### Sublime Text 3 Plugins
 
@@ -64,6 +64,19 @@ Falls ihr Sublime Text 3 verwendet empfehle ich folgende Plugins:
 
 - [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) mit [jshint](https://github.com/SublimeLinter/SublimeLinter-jshint) und [jscs](https://github.com/SublimeLinter/SublimeLinter-jscs/)
 - [Jade](https://packagecontrol.io/packages/Jade)
+
+### Git Workflow
+
+Als erstes solltet ihr schauen, dass ihr `git` [installiert](http://git-scm.com/downloads) habt und es anständig [konfiguriert](https://help.github.com/articles/set-up-git/) ist. Falls git euch regelmäßig nach eurem Github Passwort fragt, ist es hilfreich es im [Schlüsselbund zu speichern](https://help.github.com/articles/caching-your-github-password-in-git/).
+
+Der von uns verwendete Workflow ist [hier](https://guides.github.com/introduction/flow/) ausführlich beschrieben. Im Prinzip gilt folgendes:
+
+- Der `master` branch funktioniert immer und ist weitesgehend die live Version.
+- Neue Ideen/Features werden in extra branches (`git checkout -b neuer-branch-name`) entwickelt.
+- Diese Branches werden zu Github gepusht (`git push neuer-branch-name`) und können dort als Pull Requests diskutiert werden.
+- Wenn die Arbeiten fertig und alle zufrieden sind, wird der branch zu `master` gemergt.
+
+[Cheatsheet](https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf)
 
 ## Contributors
 - Fabian Gündel
