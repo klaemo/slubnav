@@ -60,7 +60,6 @@
     "watchify": "^2.2.1"
   },
   "dependencies": {
-    "amp-debounce": "^1.0.1",
     "ampersand-collection": "^1.3.17",
     "ampersand-dom": "^1.2.7",
     "ampersand-router": "^1.0.6",
@@ -71,6 +70,7 @@
     "fastclick": "^1.0.3",
     "hammerjs": "^2.0.4",
     "hummingbird": "^2.0.2",
+    "lodash.throttle": "^2.4.1",
     "normalize.css": "^3.0.2",
     "popover": "^2.0.0",
     "raf-component": "^1.1.2",

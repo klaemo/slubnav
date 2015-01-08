@@ -1,9 +1,9 @@
 'use strict';
-var debounce = require('amp-debounce')
+var throttle = require('lodash.throttle')
 var View = require('ampersand-view')
 var app = require('../app')
 var template = require('../templates/search-box.jade')
-var resultsTmpl = require('../templates/search-results.jade')
+var resultBox = require('../templates/search-results.jade')
 
 var ESC_KEY = 27
 
@@ -18,23 +18,18 @@ module.exports = View.extend({
     this.listenTo(app.locations, 'search', this.showResults)
   },
 
-  search: debounce(function(event) {
-    var q = event.target.value
-    if (event.which === ESC_KEY) {
+  search: throttle(function(event) {
+    var query = event.target.value
+    if (event.which === ESC_KEY || !query) {
       event.target.value = ''
       this.showResults()
       return
     }
-    if (!q || q.length < 3) return
-    app.locations.search(q.trim())
-  }, 100),
+    app.locations.search(query.trim())
+  }, 75),
 
-  showResults: function(results) {
-    if (!results || !results.length) {
-      this.resultBox.innerHTML = ''
-      return
-    }
-    this.resultBox.innerHTML = resultsTmpl({ results: results})
+  showResults: function(res) {
+    this.resultBox.innerHTML = (res && res.length) ? resultBox({ results: res }) : ''
   },
 
   render: function() {
