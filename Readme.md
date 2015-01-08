@@ -90,6 +90,7 @@ $ git push origin mein-cooles-feature
 ```
 
 [Cheatsheet](https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf)
+[Github Emojis](http://www.emoji-cheat-sheet.com/)
 
 ## Contributors
 - Fabian Gündel
