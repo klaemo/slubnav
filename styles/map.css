@@ -90,7 +90,7 @@
   transition: opacity 100ms;
 }*/
 
-.scan-box-popover .placeholder {
+.scan-box-popover .qr-placeholder {
   background-color: grey;
   width: 100px;
   height: 100px;
