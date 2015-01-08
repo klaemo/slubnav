@@ -73,8 +73,17 @@ Der von uns verwendete Workflow ist [hier](https://guides.github.com/introductio
 
 - Der `master` branch funktioniert immer und ist weitesgehend die live Version.
 - Neue Ideen/Features werden in extra branches (`git checkout -b neuer-branch-name`) entwickelt.
-- Diese Branches werden zu Github gepusht (`git push neuer-branch-name`) und können dort als Pull Requests diskutiert werden.
+- Diese Branches werden zu Github gepusht (`git push origin neuer-branch-name`) und können dort als Pull Requests diskutiert werden.
 - Wenn die Arbeiten fertig und alle zufrieden sind, wird der branch zu `master` gemergt.
+
+Beispiel:
+```
+$ git checkout -b mein-cooles-feature master
+# tests + code schreiben
+$ git add änderungen.js
+$ git commit -m "Kurze Beschreibung was geändert wurde"
+$ git push origin mein-cooles-feature
+```
 
 [Cheatsheet](https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf)
 
