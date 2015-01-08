@@ -1,4 +1,8 @@
-## Komplexpraktikum InfoVis - Virtueller Rundgang [![Build Status](https://travis-ci.org/klaemo/slubnav.svg)](https://travis-ci.org/klaemo/slubnav)
+## Komplexpraktikum InfoVis - Virtueller Rundgang
+[![Build Status](https://travis-ci.org/klaemo/slubnav.svg)](https://img.shields.io/travis/klaemo/slubnav.svg?style=flat)
+[![Dependency Status](https://david-dm.org/klaemo/slubnav.svg?theme=shields.io&style=flat)](https://david-dm.org/klaemo/slubnav)
+[![devDependency Status](https://david-dm.org/klaemo/slubnav/dev-status.svg?theme=shields.io&style=flat)](https://david-dm.org/klaemo/slubnav#info=devDependencies)
+
 Live: [slub.klaemo.me](http://slub.klaemo.me) (work in progress)
 
 ## Installation
