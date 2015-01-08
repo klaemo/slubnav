@@ -21,6 +21,7 @@ body {
   left: 0;
   margin: 2vh 2vw;
   box-shadow: var(--shadow);
+  background-color: #FFFFFF;
 }
 
 .animate {
