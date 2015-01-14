@@ -74,6 +74,20 @@ gulp.task('deploy-images', ['copy'], function() {
     .pipe(awspublish.reporter())
 })
 
+gulp.task('deploy-fonts', ['copy'], function() {
+  var publisher = awspublish.create(aws)
+  var headers = {
+    'Cache-Control': 'max-age=315360000, no-transform, public'
+  }
+
+  return gulp.src('build/fonts/**')
+    .pipe(rename(function(path) {
+      path.dirname = 'fonts/' + path.dirname
+    }))
+    .pipe(publisher.publish(headers, { simulate: process.env.DRY_RUN }))
+    .pipe(awspublish.reporter())
+})
+
 gulp.task('deploy-html', ['rev'], function() {
   var publisher = awspublish.create(aws)
   var headers = {
@@ -98,4 +112,4 @@ gulp.task('deploy-assets', ['build'], function() {
 })
 
 gulp.task('build', ['compile index.html'])
-gulp.task('deploy', ['deploy-assets', 'deploy-html', 'deploy-images'])
+gulp.task('deploy', ['deploy-assets', 'deploy-html', 'deploy-images', 'deploy-fonts'])
