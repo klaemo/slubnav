@@ -3,6 +3,7 @@
 }
 
 @import "../node_modules/normalize.css/normalize.css";
+@import "ionicons.css";
 @import "../node_modules/popover/popover.css";
 @import "../node_modules/popover/popover-theme.css";
 @import "typo.css";
