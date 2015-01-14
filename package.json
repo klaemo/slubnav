@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "deploy": "npm ls && npm run lint && npm test && gulp deploy",
-    "lint": "jshint . & jscs .",
+    "lint": "jshint . && jscs .",
     "browser-test": "browserify test/*.js -d -o test/test.bundle.js && open test/test.html",
     "test": "tape test/*.js | tap-spec",
     "watch-tests": "nodemon --watch test -e js --exec 'npm test'",
@@ -37,7 +37,7 @@
   ],
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^8.0.3",
+    "browserify": "^8.1.0",
     "bundle-collapser": "^1.1.1",
     "del": "^1.1.1",
     "drudge": "^2.0.0",
@@ -46,7 +46,7 @@
     "gulp-myth": "^1.0.2",
     "gulp-rename": "^1.2.0",
     "gulp-rev": "^2.0.1",
-    "jade": "^1.7.0",
+    "jade": "^1.9.0",
     "jadeify": "^4.0.0",
     "jscs": "1.8.1",
     "jshint": "^2.5.10",

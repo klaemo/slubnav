@@ -12,7 +12,7 @@ Dann habt ihr auf der Kommandozeile das `node` Kommando.
 Probiert ob es funktioniert:
 ```bash
 node --version
-v0.10.33
+v0.10.35
 ```
 
 Danach solltet ihr [npm](http://npmjs.org) auf den aktuellsten Stand bringen:
@@ -61,6 +61,10 @@ In `node_modules` liegen die mit `npm` installierten Module. Dieser Ordner wird 
 **Kein jQuery**
 
 Weitere findet ihr auf [tools.ampersandjs.com](http://tools.ampersandjs.com) und [npmjs.com](https://npmjs.com).
+
+Diese müsst ihr mit `npm install --save paket-name` (kurz: `npm i -S paket-name`) installieren. Dabei wird auch gleich die entsprechende Information im `dependencies` Feld der `package.json` hinterlegt, so dass in Zukunft auch alle anderen diese Abhängigkeit einfach installieren können.
+
+__Hinweis:__ Fügt jemand in einem commit eine neue Abhängigkeit hinzu, müssen die anderen nach dem nächsten `git pull` wieder `npm install` durchführen.
 
 ### Sublime Text 3 Plugins
 
