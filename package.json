@@ -10,6 +10,7 @@
     "test": "tape test/*.js | tap-spec",
     "watch-tests": "nodemon --watch test -e js --exec 'npm test'",
     "start": "npm run watch-css & npm run watch-js & drudge -t -d public",
+    "start-prod": "drudge -t -d build",
     "build": "gulp build",
     "watch-js": "watchify index.js -d -o public/app.built.js",
     "watch-css": "nodemon --watch styles -e css --exec 'myth styles/index.css public/app.built.css'"

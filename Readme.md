@@ -96,6 +96,14 @@ $ git push origin mein-cooles-feature
 [Cheatsheet](https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf)
 [Github Emojis](http://www.emoji-cheat-sheet.com/)
 
+### Docker
+
+Das aktuelle Image liegt im [Docker Hub](https://registry.hub.docker.com/u/klaemo/slubnav/) und lässt sich somit ganz einfach durch folgenden Befehl starten:
+
+```
+docker run -d -p 3000:3000 klaemo/slubnav:latest
+```
+
 ## Contributors
 - Fabian Gündel
 - Leo Käßner
