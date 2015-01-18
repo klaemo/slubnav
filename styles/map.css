@@ -74,6 +74,8 @@
   border: 1px solid #d4d5d5;
   /*margin-left: -2vw;*/
   margin-top: -15px;
+  text-align: center;
+  min-width: 250px;
   will-change: transform;
 }
 
@@ -95,4 +97,26 @@
   width: 100px;
   height: 100px;
   margin: 0 auto;
+}
+
+.scan-box-popover input {
+  width: 50%;
+  text-align: center;
+  border: 1px solid var(--slub-grey);
+  border-radius: 3px;
+  padding: 0.5em;
+  margin: 1vh 0;
+}
+
+.info {
+  margin: 1vh 0;
+}
+
+.scan-box-popover button {
+  border: none;
+  background: none;
+}
+
+.scan-box-popover button i {
+  font-size: 3em;
 }

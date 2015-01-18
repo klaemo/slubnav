@@ -3,6 +3,12 @@ body {
   color: #222;
 }
 
+h2 {
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: normal;
+}
+
 p {
   color: #ccc;
   margin: 0;
