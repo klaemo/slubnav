@@ -1,4 +1,24 @@
 body {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
   color: #222;
+}
+
+p {
+  color: #ccc;
+  margin: 0;
+}
+
+a {
+  color: #000;
+  font-size: 1.2em;
+  text-decoration: none;
+}
+
+i {
+  color: var(--slub-red);
+  font-size: 2em;
+}
+
+input {
+  font-size: 1.2em;
 }
