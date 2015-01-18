@@ -11,7 +11,8 @@ module.exports = View.extend({
   template: template,
 
   events: {
-    'keyup input': 'search'
+    'keyup input': 'search',
+    'click [data-hook=clear]': 'clear'
   },
 
   initialize: function() {
@@ -21,12 +22,16 @@ module.exports = View.extend({
   search: throttle(function(event) {
     var query = event.target.value
     if (event.which === ESC_KEY || !query) {
-      event.target.value = ''
-      this.showResults()
+      this.clear()
       return
     }
     app.locations.search(query.trim())
   }, 75),
+
+  clear: function() {
+    this.input.value = ''
+    this.showResults()
+  },
 
   showResults: function(res) {
     this.resultBox.innerHTML = (res && res.length) ? resultBox({ results: res }) : ''
@@ -35,7 +40,10 @@ module.exports = View.extend({
   render: function() {
     this.renderWithTemplate()
 
-    this.resultBox = this.query('.results-box')
+    this.cacheElements({
+      resultBox: '.results-box',
+      input: 'input[name=search]'
+    })
 
     return this
   }

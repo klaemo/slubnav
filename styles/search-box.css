@@ -1,0 +1,28 @@
+.search-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 315px;
+  margin: 2vh 2vw;
+  box-shadow: var(--shadow);
+  background-color: #fff;
+  border: 0.5px solid var(--slub-grey);
+  border-radius: 3px;
+}
+
+.search-field {
+  padding: 1px;
+  text-align: center;
+}
+
+.search-field input {
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+  vertical-align: bottom;
+  width: 80%;
+}
+
+.clear-search {
+  cursor: pointer;
+}
