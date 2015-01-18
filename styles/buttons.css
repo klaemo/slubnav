@@ -1,12 +1,13 @@
 /* Grundstyles für die runden Buttons */
 .btn-round {
-  width: 60px;
-  height: 60px;
+  width: var(--grid-u-4);
+  height: var(--grid-u-4);
   border-radius: 30px;
   color: var(--slub-red);
   background-color: white;
   border: 1px solid #d4d5d5;
   box-shadow: var(--shadow);
+  margin-right: var(--grid-spacing);
 }
 
 .btn-round:focus {
@@ -17,9 +18,9 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  margin: 2vh 2vw;
+  margin-bottom: var(--grid-spacing);
 }
 
 .popover.open {
-  
+
 }
