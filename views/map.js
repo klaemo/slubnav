@@ -3,8 +3,10 @@ var View = require('ampersand-view')
 var Hammer = require('hammerjs')
 var applyTransform = require('transform-style');
 var raf = require('raf-component')
+var domify = require('domify')
 
 var template = require('../templates/map.jade')
+var pinTemplate = require('../templates/pinTemplate.jade')
 
 module.exports = View.extend({
   template: template,
@@ -68,9 +70,27 @@ module.exports = View.extend({
 
     this.mc.add(new Hammer.Pan({ threshold: 0, pointers: 0 }))
     this.mc.add(new Hammer.Pinch({ threshold: 0 })).recognizeWith([this.mc.get('pan')])
+    this.mc.add(new Hammer.Press())
     // this.touch.get('pan').set({ direction: Hammer.DIRECTION_ALL })
     this.mc.on('panstart panmove panend', this.onPan.bind(this))
     this.mc.on('pinchstart pinchmove pinchend', this.onPinch.bind(this))
+    this.mc.on('press pressup', this.onPress.bind(this))
+  },
+
+  onPress: function(event) {
+    if (event.type === 'press') {
+
+      var newPinBox = domify(pinTemplate())
+      this.query('.draw-area').appendChild(newPinBox)
+
+      newPinBox.style.top =  (event.center.y - this.y + (this.el.offsetHeight / 2 * (this.scale - 1))) * (1 / this.scale) - 25 + 'px'
+      newPinBox.style.left =  (event.center.x - this.x + (this.el.offsetWidth / 2 * (this.scale - 1))) * (1 / this.scale) - 25 + 'px'
+
+      var invalue = [
+        'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
+      ]
+      applyTransform(newPinBox, invalue.join(' '))
+    }
   },
 
   onPan: function(event) {
@@ -91,8 +111,8 @@ module.exports = View.extend({
 
     if (event.type === 'panend') {
       this.el.classList.add('animate')
-      var targetX = -1 * event.velocityX * 325;
-      var targetY = -1 * event.velocityY * 325;
+      var targetX = -1 * event.velocityX * 325
+      var targetY = -1 * event.velocityY * 325
       this.x += targetX / 2
       this.y += targetY / 2
     }
@@ -111,6 +131,7 @@ module.exports = View.extend({
     //   ((event.center.y * this.scale) + this.y) + 'px'
     // ].join(' ')
     var scale = this.initScale * event.scale
+
     // if (event.type === 'pinchend')
     if (event.type === 'pinchend' && scale < 1) {
       this.el.classList.add('animate')
@@ -143,6 +164,16 @@ module.exports = View.extend({
     ]
 
     applyTransform(this.el, value.join(' '))
+
+    var invalue = [
+      'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
+    ]
+
+    var pins = document.getElementsByClassName('pin')
+    for (var i = 0; i < pins.length; i++) {
+      applyTransform(pins[i], invalue.join(' '))
+    }
+
     this.ticking = false
   },
 
@@ -150,5 +181,25 @@ module.exports = View.extend({
     this.renderWithTemplate()
     this.toggleTouch()
     return this
+  },
+
+  addPinToMap: function(xPos, yPos) {
+    var newPinBox = domify(pinTemplate())
+    this.query('.draw-area').appendChild(newPinBox)
+
+    newPinBox.style.top =  yPos
+    newPinBox.style.left =  xPos
+
+    var invalue = [
+      'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
+    ]
+    applyTransform(newPinBox, invalue.join(' '))
+  },
+
+  removeAllPins: function() {
+    var pins = document.getElementsByClassName('pin');
+    for (var i = 0; i < pins.length; i++) {
+      pins[i].remove()
+    }
   }
 })

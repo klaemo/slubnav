@@ -1,4 +1,11 @@
 .map-view
-  img.map.floor--2(data-floor=-2, src="/img/layer-2.png")
-  img.map.floor--1(data-floor=-1, src="/img/layer-1.png")
-  img.map.floor-0.active(data-floor=0, src="/img/layer-0.png")
+  div.map.floor--2.active(data-floor=-2)
+    div.floor-number -2
+    img.map-image(src="/img/layer-2.png")
+  div.map.floor--1.active(data-floor=-1)
+    div.floor-number -1
+    img.map-image(src="/img/layer-1.png")
+  div.map.floor-0.active(data-floor=0)
+    div.floor-number 0
+    div.draw-area
+    img.map-image(src="/img/layer-0.png")
