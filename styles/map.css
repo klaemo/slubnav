@@ -41,6 +41,10 @@
   height: auto;
 }
 
+.svg-map {
+  width: 100%;
+}
+
 .floor-number {
   position: absolute;
 
@@ -52,6 +56,10 @@
 
   color: black;
   font-size: 200px;
+}
+
+.floor-0 {
+  background: #fff;
 }
 
 .draw-area {
