@@ -1,12 +1,17 @@
 .scan-box
-  h2 QR code scannen
+  h2 Standort
   .qr-placeholder
     object(data="/img/qr-placeholder.svg" type="image/svg+xml")
+      
 
-  h2 oder Code eingeben
+  
   form
     div
       input(type="number", name="code", placeholder=1234)
-      button(type="submit")
+      button(type="submit" class="check")
         i.ion-ios-checkmark-empty
-    .info
+       .info
+        hr 
+    div     
+      p Bitte den QR-Code scannen oder den 
+      p sich darunter befindlichen Code eingeben

@@ -39,28 +39,28 @@
 }
 
 .scan-box-popover .qr-placeholder {
+  background-color: white;
+  background-image: url(/img/border-qr.svg);
   width: calc(2 * var(--grid-u-4));
   height: calc(2 * var(--grid-u-4));
   margin: 0 auto;
+  background-repeat: no-repeat;
 }
 
 .scan-box-popover .qr-placeholder object {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
+  margin-top: 10px;
 }
 
 .scan-box-popover input {
   -webkit-appearance: none;
   display: inline-block;
   width: 4em;
-  height: 48px;
   padding-left: var(--grid-spacing);
-  border: 1px solid var(--slub-grey);
-  border-right: 0;
-  border-radius: var(--border-radius);
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  box-shadow: none;
+  border:none;
+  margin-top: 60px ;
+  height: 48px;
 }
 
 .info {
@@ -70,18 +70,25 @@
 .scan-box-popover button {
   height: 48px;
   width: 48px;
-  border: 1px solid var(--slub-grey);
-  border-radius: 3px;
-  border-left: 0;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
   display: inline-block;
   vertical-align: top;
   background: none;
   padding: 0;
+  border: none;
 }
 
 .scan-box-popover button i {
   font-size: 3em;
   line-height: 1;
+}
+
+.check {
+  margin-top: 60px ;
+  display: inline-block;
+  margin-left: -10px;
+}
+
+.scan-box-popover hr {
+  width: calc(2 * var(--grid-u-4));
+  margin-bottom: 0px;
 }
