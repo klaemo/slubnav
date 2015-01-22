@@ -4,6 +4,8 @@ module.exports = State.extend({
   props: {
     showLayers: { type: 'boolean', default: false },
     scannerVisible: { type: 'boolean', default: false },
-    floor: { type: 'number', default: 0 }
+    floor: { type: 'number', default: 0 },
+    start: { type: 'object' },
+    destination: { type: 'object' }
   }
 })

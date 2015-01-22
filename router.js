@@ -27,6 +27,6 @@ module.exports = Router.extend({
   },
 
   code: function(code) {
-    app.state.set('target', code)
+    app.state.set('start', app.locations.get(parseInt(code)))
   }
 })

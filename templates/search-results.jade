@@ -1,5 +1,5 @@
 ul.search-results
   each result in results
     li.search-item
-      a(href="/code/#{result.id}") #{result.name}
+      a(data-id=result.id, href="#") #{result.name}
         p Ebene 0, ST1400-1600

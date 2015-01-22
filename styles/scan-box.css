@@ -4,7 +4,7 @@
   background-color: white;
   box-shadow: var(--shadow);
   border-radius: var(--border-radius);
-  border: 1px solid #d4d5d5;
+  border: 0.5px solid var(--slub-grey);
   margin-top: -var(--grid-spacing);
   text-align: center;
   width: var(--grid-width);
@@ -13,6 +13,10 @@
 
 .popover-content {
   padding: var(--grid-spacing);
+}
+
+.popover-top > .popover-arrow {
+  border-top-color: var(--slub-grey);
 }
 
 .scan-box-popover.open {
@@ -29,7 +33,6 @@
 }*/
 
 .scan-box-popover .qr-placeholder {
-  background-color: grey;
   width: calc(2 * var(--grid-u-4));
   height: calc(2 * var(--grid-u-4));
   margin: 0 auto;
@@ -41,15 +44,17 @@
 }
 
 .scan-box-popover input {
+  -webkit-appearance: none;
   display: inline-block;
   width: 4em;
-  padding-left: var(--grid-spacing);
   height: 48px;
+  padding-left: var(--grid-spacing);
   border: 1px solid var(--slub-grey);
   border-right: 0;
   border-radius: var(--border-radius);
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  box-shadow: none;
 }
 
 .info {

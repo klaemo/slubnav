@@ -5,7 +5,7 @@
   border-radius: 30px;
   color: var(--slub-red);
   background-color: white;
-  border: 1px solid #d4d5d5;
+  border: 0.5px solid var(--slub-grey);
   box-shadow: var(--shadow);
   margin-right: var(--grid-spacing);
 }
