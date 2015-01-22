@@ -115,13 +115,13 @@
 }
 
 .layered .map.floor-0 {
-  transform: translateY(-250px) rotateX(67.5deg) rotateZ(45deg) scale(0.4);
+  transform: translateY(-300px) rotateX(67.5deg) rotateZ(45deg) scale(0.4);
 }
 
 .layered .map.floor--1 {
-  transform: translateY(-150px) rotateX(67.5deg) rotateZ(45deg) scale(0.4);
+  transform: translateY(-200px) rotateX(67.5deg) rotateZ(45deg) scale(0.4);
 }
 
 .layered .map.floor--2 {
-  transform: translateY(-50px) rotateX(67.5deg) rotateZ(45deg) scale(0.4);
+  transform: translateY(-100px) rotateX(67.5deg) rotateZ(45deg) scale(0.4);
 }
