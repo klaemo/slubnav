@@ -14,6 +14,11 @@ module.exports = View.extend({
 
   initialize: function() {
     this.listenTo(this.model, 'change:scannerVisible', this.renderScanner)
+    this.listenTo(this.model, 'change:showLayers', this.hideScanner)
+  },
+
+  hideScanner: function(model, showLayers) {
+    this.model.scannerVisible = false
   },
 
   toggleScanner: function(event) {

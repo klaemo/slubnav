@@ -29,7 +29,9 @@
   height: auto;
   border: 8px solid transparent;
   will-change: transform, border-color, opacity;
-  transition: transform 350ms ease-out, opacity 350ms;
+  transition-property: transform, opacity;
+  transition-duration: 350ms;
+  transition-timing-function: ease-out;
 }
 
 .map.active {

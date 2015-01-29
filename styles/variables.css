@@ -6,7 +6,7 @@
   --slub-lightblue: #44ddee;
   --slub-grey: #a7a5a3;
 
-  --shadow: 2px 2px 10px rgba(170, 170, 170, 0.75);
+  --shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
   --grid-spacing: 16px;
   --grid-u-1: 16px;
   --grid-u-2: 32px;
