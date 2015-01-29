@@ -79,17 +79,7 @@ module.exports = View.extend({
 
   onPress: function(event) {
     if (event.type === 'press') {
-
-      var newPinBox = domify(pinTemplate())
-      this.query('.draw-area').appendChild(newPinBox)
-
-      newPinBox.style.top =  (event.center.y - this.y + (this.el.offsetHeight / 2 * (this.scale - 1))) * (1 / this.scale) - 25 + 'px'
-      newPinBox.style.left =  (event.center.x - this.x + (this.el.offsetWidth / 2 * (this.scale - 1))) * (1 / this.scale) - 25 + 'px'
-
-      var invalue = [
-        'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
-      ]
-      applyTransform(newPinBox, invalue.join(' '))
+      this.addPinToMap(((event.center.x - this.x + (this.el.offsetWidth / 2 * (this.scale - 1))) * (1 / this.scale) - 25), ((event.center.y - this.y + (this.el.offsetHeight / 2 * (this.scale - 1))) * (1 / this.scale) - 25))
     }
   },
 
@@ -185,21 +175,33 @@ module.exports = View.extend({
 
   addPinToMap: function(xPos, yPos) {
     var newPinBox = domify(pinTemplate())
-    this.query('.draw-area').appendChild(newPinBox)
 
-    newPinBox.style.top =  yPos
-    newPinBox.style.left =  xPos
+    if (this.query('.draw-area').children.length === 0) {
+      newPinBox.classList.add('start-pin')
+    }else if (this.query('.draw-area').children.length === 1) {
+      newPinBox.classList.add('finish-pin')
+    }
+    if (this.query('.draw-area').children.length < 2) {
+      //Add new pin to draw-area
+      this.query('.draw-area').appendChild(newPinBox)
 
-    var invalue = [
-      'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
-    ]
-    applyTransform(newPinBox, invalue.join(' '))
+      newPinBox.style.top =  yPos + 'px'
+      newPinBox.style.left =  xPos + 'px'
+
+      var invalue = [
+        'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
+      ]
+      applyTransform(newPinBox, invalue.join(' '))
+    }else {
+      //If already 2 pins exist -> delete all
+      this.removeAllPins()
+    }
   },
 
   removeAllPins: function() {
     var pins = document.getElementsByClassName('pin');
-    for (var i = 0; i < pins.length; i++) {
-      pins[i].remove()
+    while (pins.length > 0) {
+      pins[0].remove()
     }
   }
 })
