@@ -177,9 +177,9 @@ module.exports = View.extend({
     var newPinBox = domify(pinTemplate())
 
     if (this.query('.draw-area').children.length === 0) {
-      newPinBox.classList.add('start-pin')
+      newPinBox.children[0].classList.add('ion-ios-circle-filled')
     }else if (this.query('.draw-area').children.length === 1) {
-      newPinBox.classList.add('finish-pin')
+      newPinBox.children[0].classList.add('ion-ios-location')
     }
     if (this.query('.draw-area').children.length < 2) {
       //Add new pin to draw-area
