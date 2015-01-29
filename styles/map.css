@@ -84,14 +84,30 @@
   width: 50px;
   height: 50px;
 
-  font-size: 50px;
+  /*font-size: 50px;*/
 }
 
 .pin i {
   position: absolute;
 
+  display: inline-block;
+  font-family: "Ionicons";
+  font-style: normal; font-weight: normal; font-variant: normal; text-transform: none;
+
   left: 0%;
   top: -150%;
+}
+
+.pin.start-pin i:before {
+  font-size: 30px;
+
+  content: "\f2a7"; 
+}
+
+.pin.finish-pin i:before {
+  font-size: 50px;
+
+  content: "\f456"; 
 }
 
 /* Layered 3D */
