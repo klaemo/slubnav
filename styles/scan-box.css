@@ -8,7 +8,9 @@
   margin-top: -var(--grid-spacing);
   text-align: center;
   width: var(--grid-width);
-  will-change: transform;
+  will-change: transform opacity;
+  transition: opacity 200ms;
+}
 
 @media only screen and (max-width: 1024px) {
   .scan-box-popover {
@@ -28,14 +30,13 @@
   transform-origin: 90% 110%;
   animation-name: open;
   animation-delay: 0;
-  animation-duration: 350ms;
+  animation-duration: 300ms;
   animation-timing-function: ease-out;
 }
 
-/*.scan-box-popover.fadeOut {
-  opacity: 0 !important;
-  transition: opacity 100ms;
-}*/
+.scan-box-popover.fade {
+  /*transition: opacity 200ms;*/
+}
 
 .scan-box-popover .qr-placeholder {
   width: calc(2 * var(--grid-u-4));
