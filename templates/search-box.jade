@@ -2,17 +2,20 @@
   .search-field
 
     .start
-      span.search-icon: i.ion-ios-search-strong
-      span.start-icon: i.ion-ios-circle-filled
+      .icon-container
+        span.search-icon: i.ion-ios-search-strong
+        span.start-icon: i.ion-ios-circle-filled
+        span.dots-icon: i.ion-more
       input(type="text", name="start", placeholder="Start")
-      span(data-hook="clear", data-input="start").clear-search: i.ion-ios-close-empty
+      .icon-container.clear-search(data-hook="clear", data-input="start")
+        span: i.ion-ios-close-empty
 
     .destination
-      span.location-icon
-        i.ion-more
-        i.ion-ios-location
+      .icon-container
+        span.location-icon: i.ion-ios-location
       input(type="text", name="destination", placeholder="Ziel")
-      span(data-hook="clear", data-input="destination").clear-search: i.ion-ios-close-empty
+      .icon-container.clear-search(data-hook="clear", data-input="destination")
+        span: i.ion-ios-close-empty
 
     button(data-hook="swap").swap-btn: i.ion-arrow-swap
 

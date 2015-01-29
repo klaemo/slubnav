@@ -13,7 +13,7 @@ module.exports = View.extend({
   events: {
     'focus input': 'onFocus',
     'keyup input': 'onKeyup',
-    'click span[data-hook=clear]': 'clear',
+    'click [data-hook=clear]': 'clear',
     'click [data-hook=swap]': 'swap',
     'click .search-item a': 'onSearchItem'
   },
@@ -36,8 +36,9 @@ module.exports = View.extend({
 
   initialize: function() {
     this.model = app.state
-    this.listenTo(app.locations, 'search', this.showResults)
+    this.listenTo(app.locations, 'search', this.toggleResults)
     this.listenTo(app.state, 'change:destination change:start', this.toggleRouteView)
+    this.listenTo(app.state, 'change:showLayers', this.toggleResults)
   },
 
   toggleRouteView: function(model) {
@@ -52,9 +53,18 @@ module.exports = View.extend({
     event.preventDefault()
     var id = event.target.dataset.id
     var location = app.locations.get(id)
+
     if (location) {
       this.model.set(this.focused, location)
     }
+
+    if (this.focused === 'start' && (this.model.start || this.model.destination)) {
+      setTimeout(function() {
+        this.destination.focus()
+      }.bind(this), 250)
+    }
+
+    this.toggleResults()
   },
 
   onKeyup: throttle(function(event) {
@@ -65,7 +75,6 @@ module.exports = View.extend({
       this.clear(name)
       return
     }
-    // this.set(name, query)
 
     // search
     app.locations.search(query.trim())
@@ -73,9 +82,13 @@ module.exports = View.extend({
 
   clear: function(event) {
     var name = typeof event === 'string' ? event : event.target.dataset.input
-    // this.unset(name)
+
     this.model.unset(name)
-    this.showResults()
+
+    if (this.model.start || this.model.destination) {
+      this[this.focused].focus()
+    }
+    this.toggleResults()
   },
 
   swap: function() {
@@ -84,15 +97,29 @@ module.exports = View.extend({
     this.model.set('destination', start)
   },
 
-  showResults: function(res) {
-    this.resultBox.innerHTML = (res && res.length) ? resultBox({ results: res }) : ''
+  toggleResults: function(res) {
+    var show = res && res.length
+
+    if (show) {
+      this.resultBox.innerHTML = resultBox({ results: res })
+    } else {
+      setTimeout(function() {
+        this.resultBox.innerHTML = ''
+        this.resultBox.classList.remove('hide')
+      }.bind(this), 250)
+    }
+
+    this.resultBox.classList.toggle('hide', !show)
+    this.el.classList.toggle('result-view', show)
   },
 
   render: function() {
     this.renderWithTemplate()
 
     this.cacheElements({
-      resultBox: '.results-box'
+      resultBox: '.results-box',
+      start: 'input[name=start]',
+      destination: 'input[name=destination]'
     })
 
     return this
