@@ -95,7 +95,25 @@
   font-style: normal; font-weight: normal; font-variant: normal; text-transform: none;
 
   left: 0%;
-  top: -150%;
+  top: -50%;
+
+  animation-name: dropIn;
+  animation-duration: 200ms; 
+  animation-timing-function: ease-out;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    top:-550%;
+  }
+  33% {
+    opacity: 1;
+  }
+  to {
+    top:-50%;
+    opacity: 1;
+  }
 }
 
 .pin.start-pin i:before {
