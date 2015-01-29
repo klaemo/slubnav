@@ -9,6 +9,11 @@
   text-align: center;
   width: var(--grid-width);
   will-change: transform;
+
+@media only screen and (max-width: 1024px) {
+  .scan-box-popover {
+    width: var(--grid-width-sm);
+  }
 }
 
 .popover-content {

@@ -5,6 +5,11 @@
   right: 0;
   width: var(--grid-width);
   box-shadow: var(--shadow);
+@media only screen and (max-width: 1024px) {
+  .search-box {
+    width: var(--grid-width-sm);
+  }
+}
   background-color: #fff;
   border: 0.5px solid var(--slub-grey);
   border-radius: var(--border-radius);
