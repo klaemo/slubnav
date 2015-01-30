@@ -71,7 +71,7 @@ module.exports = View.extend({
     this.mc.add(new Hammer.Pan({ threshold: 0, pointers: 0 }))
     this.mc.add(new Hammer.Pinch({ threshold: 0 })).recognizeWith([this.mc.get('pan')])
     this.mc.add(new Hammer.Press())
-    // this.touch.get('pan').set({ direction: Hammer.DIRECTION_ALL })
+
     this.mc.on('panstart panmove panend', this.onPan.bind(this))
     this.mc.on('pinchstart pinchmove pinchend', this.onPinch.bind(this))
     this.mc.on('press pressup', this.onPress.bind(this))
@@ -79,17 +79,7 @@ module.exports = View.extend({
 
   onPress: function(event) {
     if (event.type === 'press') {
-
-      var newPinBox = domify(pinTemplate())
-      this.query('.draw-area').appendChild(newPinBox)
-
-      newPinBox.style.top =  (event.center.y - this.y + (this.el.offsetHeight / 2 * (this.scale - 1))) * (1 / this.scale) - 25 + 'px'
-      newPinBox.style.left =  (event.center.x - this.x + (this.el.offsetWidth / 2 * (this.scale - 1))) * (1 / this.scale) - 25 + 'px'
-
-      var invalue = [
-        'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
-      ]
-      applyTransform(newPinBox, invalue.join(' '))
+      this.addPinToMap(((event.center.x - this.x + (this.el.offsetWidth / 2 * (this.scale - 1))) * (1 / this.scale) - 25), ((event.center.y - this.y + (this.el.offsetHeight / 2 * (this.scale - 1))) * (1 / this.scale) - 25))
     }
   },
 
@@ -185,21 +175,35 @@ module.exports = View.extend({
 
   addPinToMap: function(xPos, yPos) {
     var newPinBox = domify(pinTemplate())
-    this.query('.draw-area').appendChild(newPinBox)
+    var drawArea = this.query('.draw-area')
 
-    newPinBox.style.top =  yPos
-    newPinBox.style.left =  xPos
+    if (drawArea.children.length === 0) {
+      newPinBox.children[0].classList.add('ion-ios-circle-filled')
+    } else if (drawArea.children.length === 1) {
+      newPinBox.children[0].classList.add('ion-ios-location')
+    }
 
-    var invalue = [
-      'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
-    ]
-    applyTransform(newPinBox, invalue.join(' '))
+    if (drawArea.children.length < 2) {
+      // Add new pin to draw-area
+      drawArea.appendChild(newPinBox)
+
+      newPinBox.style.top =  yPos + 'px'
+      newPinBox.style.left =  xPos + 'px'
+
+      var invalue = [
+        'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
+      ]
+      applyTransform(newPinBox, invalue.join(' '))
+    } else {
+      //If already 2 pins exist -> delete all
+      this.removeAllPins()
+    }
   },
 
   removeAllPins: function() {
-    var pins = document.getElementsByClassName('pin');
-    for (var i = 0; i < pins.length; i++) {
-      pins[i].remove()
-    }
+    var pins = this.queryAll('.pin')
+    pins.forEach(function(pin) {
+      pin.parentNode.removeChild(pin)
+    })
   }
 })
