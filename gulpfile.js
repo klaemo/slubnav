@@ -10,8 +10,6 @@ var rename = require('gulp-rename')
 var del = require('del')
 
 var aws = {
-  key: process.env.AWS_KEY,
-  secret: process.env.AWS_SECRET,
   bucket: 'slub.klaemo.me',
   region: 'eu-west-1'
 }
