@@ -79,6 +79,7 @@ module.exports = View.extend({
   },
 
   toggleLayers: function() {
+    var self = this
     this.toggleTouch()
     var value = ['translate3d(0, 0, 0)', 'scale(' + this.scale + ')']
     if (app.state.showLayers) {
@@ -86,7 +87,9 @@ module.exports = View.extend({
     } else {
       applyTransform(this.activeMap, value.join(' '))
     }
-    this.el.classList.toggle('layered')
+    self.el.classList.add('transition')
+    self.el.classList.toggle('layered')
+    setTimeout(function() { self.el.classList.remove('transition') }, 400)
   },
 
   toggleTouch: function() {
