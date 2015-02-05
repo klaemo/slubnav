@@ -4,6 +4,10 @@ var Hammer = require('hammerjs')
 var applyTransform = require('transform-style');
 var raf = require('raf-component')
 var domify = require('domify')
+var app = require('../app')
+
+var fs = require('fs')
+var map = fs.readFileSync('public/img/ebene-0.svg', 'utf-8')
 
 var template = require('../templates/map.jade')
 var pinTemplate = require('../templates/pinTemplate.jade')
@@ -12,25 +16,51 @@ module.exports = View.extend({
   template: template,
 
   events: {
-    'click .map': 'onLayerClick'
+    'click svg.map': 'onLayerClick'
+    // 'click svg path': 'onLocationClick'
   },
 
-  subviews: {
-
+  // http://ampersandjs.com/docs#ampersand-state-props
+  props: {
+    x: ['number', true, 0],
+    y: ['number', true, -100],
+    maxX: ['number', true, 0],
+    maxY: ['number', true, 0],
+    minX: ['number', true, 0],
+    minY: ['number', true, 0],
+    pos: ['object', true],
+    scale: ['number', true, 1],
+    minScale: ['number', true, 1],
+    ticking: ['boolean', true, false],
+    oldX: ['number', true, 0],
+    oldY: ['number', true, 0],
+    center: ['object', true],
+    panning: ['boolean', true, false]
   },
 
   initialize: function(opts) {
-    this.x = 0
-    this.y = 0
-    this.pos = {}
-    this.scale = 1
-    this.ticking = false
-    this.oldX = 0
-    this.oldY = 0
-    this.center = {}
-
     this.listenTo(this.model, 'change:showLayers', this.toggleLayers)
     this.listenTo(this.model, 'change:floor', this.switchFloors)
+    this.listenTo(app.state, 'change:start change:destination', this.toggleRoute)
+  },
+
+  onLocationClick: function(event) {
+    if (this.panning) return false
+    event.target.style.fill = '#cc0000'
+    if (!app.state.start) {
+      app.state.start = app.locations.get(1)
+    } else {
+      app.state.destination = app.locations.get(2)
+    }
+  },
+
+  toggleRoute: function() {
+    var active = this.activeMap.querySelector('.active')
+    if (active) active.classList.remove('active')
+    var path = app.paths.get(app.state.getPathId())
+    if (!path) return
+    var el = this.activeMap.querySelector(path.selector)
+    if (el) el.classList.add('active')
   },
 
   onLayerClick: function(event) {
@@ -39,13 +69,7 @@ module.exports = View.extend({
     var map = event.target
     this.model.set('floor', parseInt(map.dataset.floor), { silent: true })
     this.query('.map.active').classList.remove('active')
-    // var self = this
-    // map.addEventListener('transitionend', function() {
-    //   self.queryAll('.map').forEach(function(el) {
-    //     if (el !== map) el.style.display = 'none'
-    //   })
-    //   map.removeEventListener('transitionend')
-    // })
+
     map.classList.add('active')
     this.switchFloors()
   },
@@ -56,17 +80,19 @@ module.exports = View.extend({
 
   toggleLayers: function() {
     this.toggleTouch()
-    var value = [
-      'translate3d(0, 0, 0)', 'scale(1)'
-    ]
-    applyTransform(this.el, value.join(' '))
+    var value = ['translate3d(0, 0, 0)', 'scale(' + this.scale + ')']
+    if (app.state.showLayers) {
+      applyTransform(this.activeMap, '')
+    } else {
+      applyTransform(this.activeMap, value.join(' '))
+    }
     this.el.classList.toggle('layered')
   },
 
   toggleTouch: function() {
     if (this.model.showLayers) return this.mc.destroy()
 
-    this.mc = new Hammer.Manager(this.el)
+    this.mc = new Hammer.Manager(this.activeMap)
 
     this.mc.add(new Hammer.Pan({ threshold: 0, pointers: 0 }))
     this.mc.add(new Hammer.Pinch({ threshold: 0 })).recognizeWith([this.mc.get('pan')])
@@ -85,46 +111,43 @@ module.exports = View.extend({
 
   onPan: function(event) {
     if (event.type === 'panstart') {
-      this.el.classList.remove('animate')
+      this.panning = true
+      this.activeMap.classList.remove('animate')
       this.oldX = this.x
       this.oldY = this.y
-      // var containerRect = this.query('.map').getBoundingClientRect()
-      // var elRect = event.target.getBoundingClientRect()
-      // this.pos = {
-      //   left: elRect.left - containerRect.left,
-      //   top: elRect.top - containerRect.top
-      // }
     }
 
-    this.x = this.oldX + event.deltaX
-    this.y = this.oldY + event.deltaY
+    var dX = this.oldX + event.deltaX
+    var dY = this.oldY + event.deltaY
+
+    // if (dX >= this.maxX || dX <= this.minX || dY >= this.maxY || dY <= this.minY) {
+    //   return
+    // }
+    this.x = dX
+    this.y = dY
 
     if (event.type === 'panend') {
-      this.el.classList.add('animate')
+      this.activeMap.classList.add('animate')
       var targetX = -1 * event.velocityX * 325
       var targetY = -1 * event.velocityY * 325
       this.x += targetX / 2
       this.y += targetY / 2
+      this.panning = false
     }
     this.requestElementUpdate()
   },
 
   onPinch: function(event) {
     if (event.type === 'pinchstart') {
-      console.log(event.center.x, event.center.y)
-      this.el.classList.remove('animate')
+      this.activeMap.classList.remove('animate')
       this.initScale = this.scale || 1
     }
 
-    // this.el.style.webkitTransformOrigin = [
-    //   ((event.center.x * this.scale) + this.x) + 'px',
-    //   ((event.center.y * this.scale) + this.y) + 'px'
-    // ].join(' ')
     var scale = this.initScale * event.scale
 
     // if (event.type === 'pinchend')
-    if (event.type === 'pinchend' && scale < 1) {
-      this.el.classList.add('animate')
+    if (event.type === 'pinchend' && scale < this.minScale) {
+      this.activeMap.classList.add('animate')
       this.scale = 1
       this.x = 0
       this.y = 0
@@ -153,24 +176,9 @@ module.exports = View.extend({
       'scale(' + this.scale + ', ' + this.scale + ')'
     ]
 
-    applyTransform(this.el, value.join(' '))
-
-    var invalue = [
-      'scale(' + 1 / this.scale + ', ' + 1 / this.scale + ')'
-    ]
-
-    var pins = document.getElementsByClassName('pin')
-    for (var i = 0; i < pins.length; i++) {
-      applyTransform(pins[i], invalue.join(' '))
-    }
+    applyTransform(this.activeMap, value.join(' '))
 
     this.ticking = false
-  },
-
-  render: function() {
-    this.renderWithTemplate()
-    this.toggleTouch()
-    return this
   },
 
   addPinToMap: function(xPos, yPos) {
@@ -205,5 +213,35 @@ module.exports = View.extend({
     pins.forEach(function(pin) {
       pin.parentNode.removeChild(pin)
     })
+  },
+
+  addMaps: function() {
+    for (var i = -2; i <= 0; i++) {
+      var dommap = domify(map)
+      dommap.classList.add('map', 'floor-' + i)
+      dommap.dataset.floor = i
+      if (i === 0) {
+        dommap.classList.add('active')
+        applyTransform(dommap, 'scale(' + this.scale + ')')
+      }
+      this.el.appendChild(dommap)
+    }
+
+    this.activeMap = this.query('.active')
+  },
+
+  render: function() {
+    var windowWidth = window.innerWidth
+    this.minScale = windowWidth / 1000
+    this.scale = this.minScale + 0.2
+    this.maxX = this.maxY = ((this.scale * 1000) - 1000) / 2
+    this.minX = this.minY = (-1 * ((this.scale * 1000) - 1000)) / 2
+    this.minY += this.y
+    this.renderWithTemplate()
+
+    this.addMaps()
+    this.toggleTouch()
+
+    return this
   }
 })
