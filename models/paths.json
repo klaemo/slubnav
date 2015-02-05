@@ -1,0 +1,5 @@
+[
+  { "id": "3-4", "path": "#umweltschutz-zu-zoologie", "selector": "#weg-1" },
+  { "id": "2-6", "path": "#info-zu-physik", "selector": "#weg-2" },
+  { "id": "1-5", "path": "#eingang-zu-sozi", "selector": "#weg-3" }
+]

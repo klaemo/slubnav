@@ -1,0 +1,8 @@
+[
+  { "id": 1, "name": "Eingangsbereich" },
+  { "id": 2, "name": "Informatik" },
+  { "id": 3, "name": "Umweltschutz" },
+  { "id": 4, "name": "Zoologie" },
+  { "id": 5, "name": "Sozialwissenschaften" },
+  { "id": 6, "name": "Physik"}
+]
