@@ -89,7 +89,7 @@ gulp.task('deploy-fonts', ['copy'], function() {
 gulp.task('deploy-html', ['rev'], function() {
   var publisher = awspublish.create(aws)
   var headers = {
-    'Cache-Control': 'max-age=3600, no-transform, public'
+    'Cache-Control': 'max-age=600, no-transform, public'
   }
 
   return gulp.src('build/index.html')
